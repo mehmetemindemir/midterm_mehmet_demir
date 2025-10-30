@@ -1,6 +1,5 @@
 package com.gb.midterm_mehmet_demir;
 
-
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -27,11 +26,11 @@ public class HistoryActivity extends AppCompatActivity {
                 new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data);
         historyList.setAdapter(adapter);
 
-        // Tap a number to reload that table on MainActivity
+        // Tap a number to regenerate that table and return
         historyList.setOnItemClickListener((parent, view, position, id) -> {
             int n = Integer.parseInt(data.get(position));
             repo.generateTable(n);
-            finish(); // go back; MainActivity will show selected table
+            finish();
         });
     }
 }
