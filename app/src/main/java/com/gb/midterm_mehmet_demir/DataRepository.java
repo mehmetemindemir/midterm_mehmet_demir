@@ -19,12 +19,12 @@ public class DataRepository {
     public Integer getCurrentNumber() { return currentNumber; }
     public Set<Integer> getHistory() { return history; }
 
-    // Generate first 10 multiples and remember the source number
     public void generateTable(int n) {
         currentNumber = n;
         currentRows.clear();
         for (int i = 1; i <= 10; i++) {
-            currentRows.add(String.valueOf(n * i)); // matches screenshot: numbers only
+            int result = n * i;
+            currentRows.add(n + " x " + i + " = " + result);
         }
         history.add(n);
     }

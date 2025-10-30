@@ -9,12 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.appbar.MaterialToolbar;
-
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,23 +19,19 @@ public class MainActivity extends AppCompatActivity {
     private EditText etNumber;
     private Button btnInsert;
     private ListView lvTable;
-
     private ArrayAdapter<String> adapter;
     private final DataRepository repo = DataRepository.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar); // <-- this makes menu show up
+        setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("timesTable");
+            getSupportActionBar().setTitle("Times Table");
         }
-
         etNumber = findViewById(R.id.etNumber);
         btnInsert = findViewById(R.id.btnInsert);
         lvTable = findViewById(R.id.lvTable);
@@ -108,5 +101,16 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
+        Integer currentNumber = repo.getCurrentNumber();
+        if (currentNumber != null) {
+            etNumber.setText(String.valueOf(currentNumber));
+            etNumber.setSelection(etNumber.getText().length());
+        }
     }
 }
