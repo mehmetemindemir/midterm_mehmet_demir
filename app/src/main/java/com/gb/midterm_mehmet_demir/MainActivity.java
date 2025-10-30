@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.appbar.MaterialToolbar;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,7 +31,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Set ActionBar title
+
+
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar); // <-- this makes menu show up
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("timesTable");
         }
@@ -58,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         });
 
-        // Tap a row to delete it (confirm + toast)
         lvTable.setOnItemClickListener((parent, view, position, id) -> {
             String value = repo.getCurrentRows().get(position);
             new AlertDialog.Builder(this)
